@@ -7,10 +7,10 @@ export default class AppNavBar extends React.Component {
     return (
       <Navbar className='nav' bg="dark" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">Kami</Navbar.Brand>
+          <Navbar.Brand onClick={this.props.resetSearch} href="#home">Kami</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+            <Nav onClick={this.props.resetSearch} className="me-auto">
               <Nav.Link href="#airing">Airing</Nav.Link>
               <Nav.Link href="#schedule">Schedule</Nav.Link>
               <Nav.Link href="#upcoming">Upcoming</Nav.Link>

@@ -16,6 +16,7 @@ export default class App extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.getSearchAnime = this.getSearchAnime.bind(this);
+    this.resetSearch = this.resetSearch.bind(this);
   }
 
   componentDidMount() {
@@ -73,6 +74,12 @@ export default class App extends React.Component {
     });
   }
 
+  resetSearch() {
+    this.setState({
+      searchResults: []
+    });
+  }
+
   renderPage() {
     const { route } = this.state;
     if (route.path === 'home') {
@@ -86,7 +93,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar route={this.state.route} />
+        <Navbar route={this.state.route} resetSearch={this.resetSearch} />
         { this.renderPage() }
       </div>
     );
