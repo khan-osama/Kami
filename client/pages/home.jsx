@@ -3,7 +3,7 @@ import { Form, Button, FormControl } from 'react-bootstrap';
 
 const heroImages = [
   {
-    imageURL: 'https://images6.alphacoders.com/112/1120777.jpg'
+    imageURL: 'https://i.imgur.com/rHhl7JK.png'
   },
 
   {
@@ -24,6 +24,13 @@ const heroImages = [
 ];
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bgImage: ''
+    };
+  }
+
   render() {
     const { airing } = this.props;
     const { upcoming } = this.props;
@@ -33,7 +40,7 @@ export default class Home extends React.Component {
     return (
       <div className='home-container'>
         <div className='bg-image'>
-          <img src={`${this.getRandomImage()}`}></img>
+          <img src={`${this.state.bgImage}`}></img>
           <div className='hero-text'>
             <h1>Kami</h1>
             <hr></hr>
@@ -48,7 +55,7 @@ export default class Home extends React.Component {
               aria-label="Search"
               onChange={this.props.handleChange}
             />
-            <Button href='#search' variant="outline-primary" onClick={this.props.getSearchAnime}>Search</Button>
+            <Button href='#search' variant="outline-primary" onClick={this.props.handleSubmit}>Search</Button>
           </Form>
           </div>
         </div>
@@ -96,8 +103,14 @@ export default class Home extends React.Component {
     );
   }
 
+  componentDidMount() {
+    this.getRandomImage();
+  }
+
   getRandomImage() {
     const randomImage = heroImages[Math.floor(Math.random() * heroImages.length)].imageURL;
-    return randomImage;
+    this.setState({
+      bgImage: randomImage
+    });
   }
 }

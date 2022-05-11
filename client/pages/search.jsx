@@ -1,13 +1,20 @@
 import React from 'react';
 
 export default class SearchPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchResults: []
+    };
+    this.getSearchAnime = this.getSearchAnime.bind(this);
+  }
+
   render() {
-    const { searchResults } = this.props;
-    const apiResponse = searchResults;
+    const apiResponse = this.state.searchResults;
     if (apiResponse.length !== 0) {
       return (
         <div className='search-container'>
-          <div className="container search-page">
+            <div className="container search-page">
             <div className="row">
               <div className="col-sm">
                 <div className='search-link'>
@@ -39,5 +46,22 @@ export default class SearchPage extends React.Component {
           </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.getSearchAnime();
+  }
+
+  getSearchAnime() {
+    const searchQuery = this.props.search;
+    fetch(`https://api.jikan.moe/v4/anime?q=${searchQuery}&sfw&order_by=popularity&sort=desc&type=tv`)
+      .then(data => {
+        return data.json();
+      })
+      .then(anime => {
+        this.setState({
+          searchResults: anime.data
+        });
+      });
   }
 }

@@ -3,6 +3,7 @@ import Home from './pages/home';
 import Navbar from './components/navbar';
 import parseRoute from '../server/parse-route';
 import SearchPage from './pages/search';
+import Airing from './pages/airing';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,18 +12,16 @@ export default class App extends React.Component {
       airing: [],
       upcoming: [],
       route: parseRoute(window.location.hash),
-      search: '',
-      searchResults: []
+      search: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.getSearchAnime = this.getSearchAnime.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
   }
 
   componentDidMount() {
     this.getAiringAnime();
     this.getUpcomingAnime();
-    this.getSearchAnime();
     window.addEventListener('hashchange', () => {
       this.setState({
         route: parseRoute(window.location.hash)
@@ -55,23 +54,15 @@ export default class App extends React.Component {
       });
   }
 
-  getSearchAnime() {
-    const searchQuery = this.state.search;
-    fetch(`https://api.jikan.moe/v4/anime?q=${searchQuery}&sfw&order_by=popularity&sort=desc&type=tv`)
-      .then(data => {
-        return data.json();
-      })
-      .then(anime => {
-        this.setState({
-          searchResults: anime.data
-        });
-      });
-  }
-
   handleChange(event) {
     this.setState({
       search: event.target.value
     });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    window.location.hash = 'search?keyword=' + this.state.search;
   }
 
   resetSearch() {
@@ -83,10 +74,13 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     if (route.path === 'home') {
-      return <Home handleChange={this.handleChange} search={this.state.search} airing={this.state.airing} upcoming={this.state.upcoming} getSearchAnime={this.getSearchAnime} />;
+      return <Home handleChange={this.handleChange} airing={this.state.airing} upcoming={this.state.upcoming} handleSubmit={this.handleSubmit} />;
     }
     if (route.path === 'search') {
-      return <SearchPage searchResults={this.state.searchResults} />;
+      return <SearchPage search = {this.state.search} />;
+    }
+    if (route.path === 'airing') {
+      return <Airing airing={this.state.airing} />;
     }
   }
 
