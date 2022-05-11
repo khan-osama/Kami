@@ -48,7 +48,7 @@ export default class Home extends React.Component {
               aria-label="Search"
               onChange={this.props.handleChange}
             />
-            <Button href='#search' variant="outline-primary" onClick={this.props.getSearchAnime}>Search</Button>
+            <Button href='#search' variant="outline-primary" onClick={this.props.handleSubmit}>Search</Button>
           </Form>
           </div>
         </div>
@@ -94,6 +94,10 @@ export default class Home extends React.Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.getRandomImage();
   }
 
   getRandomImage() {
