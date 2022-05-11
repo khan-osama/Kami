@@ -1,0 +1,85 @@
+hr {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.d-flex {
+  margin-top: 50px;
+}
+
+.airing-home-page,
+.search-page {
+  margin-top: 100px;
+}
+
+.ca-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  padding-right: 12px;
+}
+
+.anime-row {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.upcoming-anime-title,
+.airing-anime-title {
+  margin-top: 15px;
+}
+
+@media screen and (max-width: 959px) {
+  .col-sm img {
+    max-width: 100px;
+  }
+
+  .airing-anime,
+  .upcoming-anime,
+  .search-anime {
+    width: 33%;
+  }
+
+  .airing-anime-title,
+  .upcoming-anime-title,
+  .search-anime-title {
+    font-size: 14px;
+  }
+
+  .bg-image {
+    z-index: 0;
+    background: black;
+  }
+
+  .bg-image img {
+    width: 390px !important;
+    height: 1000px !important;
+    object-fit: cover !important;
+    opacity: 0.7;
+  }
+
+  #sub-header {
+    font-size: 10px;
+  }
+
+  .saitama-ok {
+    width: 150px !important;
+    height: 150px !important;
+    padding-bottom: 10px;
+    margin-left: 50px !important;
+  }
+}
+
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#not-found {
+  text-align: center;
+}
