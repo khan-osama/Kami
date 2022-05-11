@@ -3,7 +3,7 @@ import { Form, Button, FormControl } from 'react-bootstrap';
 
 const heroImages = [
   {
-    imageURL: 'https://images6.alphacoders.com/112/1120777.jpg'
+    imageURL: 'https://i.imgur.com/rHhl7JK.png'
   },
 
   {

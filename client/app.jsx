@@ -3,6 +3,7 @@ import Home from './pages/home';
 import Navbar from './components/navbar';
 import parseRoute from '../server/parse-route';
 import SearchPage from './pages/search';
+import Airing from './pages/airing';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -87,6 +88,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'search') {
       return <SearchPage searchResults={this.state.searchResults} />;
+    }
+    if (route.path === 'airing') {
+      return <Airing airing={this.state.airing} />;
     }
   }
 
