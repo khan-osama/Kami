@@ -24,6 +24,13 @@ const heroImages = [
 ];
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bgImage: ''
+    };
+  }
+
   render() {
     const { airing } = this.props;
     const { upcoming } = this.props;
@@ -33,7 +40,7 @@ export default class Home extends React.Component {
     return (
       <div className='home-container'>
         <div className='bg-image'>
-          <img src={`${this.getRandomImage()}`}></img>
+          <img src={`${this.state.bgImage}`}></img>
           <div className='hero-text'>
             <h1>Kami</h1>
             <hr></hr>
@@ -102,6 +109,8 @@ export default class Home extends React.Component {
 
   getRandomImage() {
     const randomImage = heroImages[Math.floor(Math.random() * heroImages.length)].imageURL;
-    return randomImage;
+    this.setState({
+      bgImage: randomImage
+    });
   }
 }
