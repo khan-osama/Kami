@@ -10,7 +10,8 @@ hr {
 .airing-home-page,
 .search-page,
 .upcoming-page,
-.top-page {
+.top-page,
+.schedule-page {
   margin-top: 100px;
 }
 
@@ -40,6 +41,10 @@ a {
 @media screen and (max-width: 959px) {
   .col-sm img {
     max-width: 100px;
+  }
+
+  .col-sm {
+    max-width: 128px !important;
   }
 
   .airing-anime,
@@ -95,4 +100,8 @@ a {
 
 #not-found {
   text-align: center;
+}
+
+.col-sm {
+  max-width: 264px;
 }

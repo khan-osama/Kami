@@ -6,6 +6,7 @@ import SearchPage from './pages/search';
 import Airing from './pages/airing';
 import Upcoming from './pages/upcoming';
 import Top from './pages/top';
+import Schedule from './pages/schedule';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -89,6 +90,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'top') {
       return <Top />;
+    }
+    if (route.path === 'schedule') {
+      return <Schedule />;
     }
   }
 
