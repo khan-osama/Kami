@@ -15,7 +15,7 @@ export default class AppNavBar extends React.Component {
               <Nav.Link href="#schedule">Schedule</Nav.Link>
               <Nav.Link href="#upcoming">Upcoming</Nav.Link>
               <Nav.Link href="#saved">Saved</Nav.Link>
-              <Nav.Link href="#top">Top 100</Nav.Link>
+              <Nav.Link href="#top?page=1">Top 25</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

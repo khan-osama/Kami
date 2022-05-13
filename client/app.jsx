@@ -5,6 +5,7 @@ import parseRoute from '../server/parse-route';
 import SearchPage from './pages/search';
 import Airing from './pages/airing';
 import Upcoming from './pages/upcoming';
+import Top from './pages/top';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -85,6 +86,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'upcoming') {
       return <Upcoming upcoming={this.state.upcoming} />;
+    }
+    if (route.path === 'top') {
+      return <Top />;
     }
   }
 
