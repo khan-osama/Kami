@@ -31,7 +31,7 @@ export default class Schedule extends React.Component {
                     return (
                         <div key={obj.title} className='col-sm schedule-anime'>
                               <img className='schedule-anime-img' src={`${obj.images.jpg.image_url}`}></img>
-                              <a href={'#details?anime=' + obj.title} className='schedule-anime-title' onClick={this.props.getAnimeClicked}>{obj.title}</a>
+                              <a href={'#details?animeId=' + obj.mal_id} className='schedule-anime-title'>{obj.title}</a>
                         </div>
                     );
                   })}
