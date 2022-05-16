@@ -26,12 +26,12 @@ export default class Schedule extends React.Component {
           {daysOfWeek.map((days, index) => {
             return (
               <div key={days} className="row week-row">
-                <h1>{days}</h1>
+                <h1 className='weekday'>{days}</h1>
                   {schedule.filter(anime => anime.broadcast.day === days).map((obj, index) => {
                     return (
                         <div key={obj.title} className='col-sm schedule-anime'>
-                              <img className='top-anime-img' src={`${obj.images.jpg.image_url}`}></img>
-                              <h4 className='top-anime-title'>{obj.title}</h4>
+                              <img className='schedule-anime-img' src={`${obj.images.jpg.image_url}`}></img>
+                              <a href={'#details?anime=' + obj.title} className='schedule-anime-title' onClick={this.props.getAnimeClicked}>{obj.title}</a>
                         </div>
                     );
                   })}

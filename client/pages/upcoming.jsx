@@ -19,7 +19,7 @@ export default class Upcoming extends React.Component {
               return (
                 <div key={obj.mal_id} className='col-sm upcoming-anime'>
                   <img className='upcoming-anime-img' src={`${obj.images.jpg.image_url}`}></img>
-                  <h4 className='upcoming-anime-title'>{obj.title}</h4>
+                  <a href={'#details?anime=' + obj.title} className='upcoming-anime-title' onClick={this.props.getAnimeClicked}>{obj.title}</a>
                 </div>
               );
             })}

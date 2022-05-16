@@ -7,6 +7,7 @@ import Airing from './pages/airing';
 import Upcoming from './pages/upcoming';
 import Top from './pages/top';
 import Schedule from './pages/schedule';
+import Details from './pages/details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -15,11 +16,13 @@ export default class App extends React.Component {
       airing: [],
       upcoming: [],
       route: parseRoute(window.location.hash),
-      search: ''
+      search: '',
+      animeClicked: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
+    this.getAnimeClicked = this.getAnimeClicked.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +60,12 @@ export default class App extends React.Component {
       });
   }
 
+  getAnimeClicked(event) {
+    this.setState({
+      animeClicked: event.target.innerHTML
+    });
+  }
+
   handleChange(event) {
     this.setState({
       search: event.target.value
@@ -77,22 +86,25 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     if (route.path === 'home' || route.path === '') {
-      return <Home handleChange={this.handleChange} airing={this.state.airing} upcoming={this.state.upcoming} handleSubmit={this.handleSubmit} />;
+      return <Home handleChange={this.handleChange} airing={this.state.airing} upcoming={this.state.upcoming} handleSubmit={this.handleSubmit} getAnimeClicked={this.getAnimeClicked} />;
     }
     if (route.path === 'search') {
-      return <SearchPage search = {this.state.search} />;
+      return <SearchPage search = {this.state.search} getAnimeClicked={this.getAnimeClicked}/>;
     }
     if (route.path === 'airing') {
-      return <Airing airing={this.state.airing} />;
+      return <Airing airing={this.state.airing} getAnimeClicked={this.getAnimeClicked} />;
     }
     if (route.path === 'upcoming') {
-      return <Upcoming upcoming={this.state.upcoming} />;
+      return <Upcoming upcoming={this.state.upcoming} getAnimeClicked={this.getAnimeClicked} />;
     }
     if (route.path === 'top') {
-      return <Top />;
+      return <Top getAnimeClicked={this.getAnimeClicked} />;
     }
     if (route.path === 'schedule') {
-      return <Schedule />;
+      return <Schedule getAnimeClicked={this.getAnimeClicked} />;
+    }
+    if (route.path === 'details') {
+      return <Details animeClicked={this.state.animeClicked} />;
     }
   }
 

@@ -27,7 +27,7 @@ export default class SearchPage extends React.Component {
               return (
                   <div key={obj.mal_id} className='col-sm search-anime'>
                     <img className='search-anime-img' src={`${obj.images.jpg.image_url}`}></img>
-                    <h4 className='search-anime-title'>{obj.title}</h4>
+                    <a href={'#details?anime=' + obj.title} className='search-anime-title' onClick={this.props.getAnimeClicked}>{obj.title}</a>
                   </div>
               );
             })}

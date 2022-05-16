@@ -27,7 +27,7 @@ export default class Top extends React.Component {
                 <div key={obj.mal_id} className='col-sm top-anime'>
                   <div className='rankings'>{index + 1}</div>
                   <img className='top-anime-img' src={`${obj.images.jpg.image_url}`}></img>
-                  <h4 className='top-anime-title'>{obj.title}</h4>
+                  <a href={'#details?anime=' + obj.title} className='top-anime-title' onClick={this.props.getAnimeClicked}>{obj.title}</a>
                 </div>
               );
             })}
