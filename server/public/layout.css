@@ -43,7 +43,7 @@ a {
     max-width: 100px;
   }
 
-  .col-sm {
+  .schedule-anime {
     max-width: 128px !important;
   }
 
@@ -102,6 +102,6 @@ a {
   text-align: center;
 }
 
-.col-sm {
+.schedule-anime {
   max-width: 264px;
 }

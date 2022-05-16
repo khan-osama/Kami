@@ -48,22 +48,20 @@ export default class Schedule extends React.Component {
   }
 
   getScheduleAnime() {
-    let pageNum = 1;
-    const dataArr = [];
-    setTimeout(() => {
-      for (let i = 0; i < 2; i++) {
-        fetch(`https://api.jikan.moe/v4/seasons/now?page=${pageNum}`)
-          .then(data => {
-            return data.json();
-          })
-          .then(anime => {
-            dataArr.push(anime.data);
-            this.setState({
-              schedule: dataArr.flat()
-            });
-          });
-        pageNum++;
-      }
-    }, 2000);
+    const scheduleRequests = Array(3).fill().reduce((previous, _, index) => {
+      const pageNum = index + 1;
+      return previous.then(schedule => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            fetch(`https://api.jikan.moe/v4/seasons/now?page=${pageNum}`)
+              .then(res => res.json())
+              .then(page => resolve(page));
+          }, 800);
+        }).then(nextPage => schedule.concat(nextPage.data));
+      });
+    }, Promise.resolve([]));
+
+    scheduleRequests
+      .then(schedule => this.setState({ schedule }));
   }
 }
