@@ -7,6 +7,7 @@ import Airing from './pages/airing';
 import Upcoming from './pages/upcoming';
 import Top from './pages/top';
 import Schedule from './pages/schedule';
+import Details from './pages/details';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -80,7 +81,7 @@ export default class App extends React.Component {
       return <Home handleChange={this.handleChange} airing={this.state.airing} upcoming={this.state.upcoming} handleSubmit={this.handleSubmit} />;
     }
     if (route.path === 'search') {
-      return <SearchPage search = {this.state.search} />;
+      return <SearchPage search = {this.state.search}/>;
     }
     if (route.path === 'airing') {
       return <Airing airing={this.state.airing} />;
@@ -93,6 +94,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'schedule') {
       return <Schedule />;
+    }
+    if (route.path === 'details') {
+      return <Details animeId={route.params.get('animeId')} />;
     }
   }
 

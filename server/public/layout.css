@@ -3,6 +3,15 @@ hr {
   margin-bottom: 30px;
 }
 
+.airing-anime-img,
+.search-anime-img,
+.upcoming-anime-img,
+.top-anime-img,
+.schedule-anime-img {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
 .d-flex {
   margin-top: 50px;
 }
@@ -33,18 +42,43 @@ a {
 .upcoming-anime-title,
 .airing-anime-title,
 .search-anime-title,
-.top-anime-title {
-  margin-top: 15px;
-  padding-bottom: 10px;
+.top-anime-title,
+.schedule-anime-title {
+  font-size: 22px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 959px) {
-  .col-sm img {
-    max-width: 100px;
+  .schedule-anime {
+    display: flex;
+    margin-top: 10%;
+    max-width: 128px !important;
   }
 
-  .schedule-anime {
-    max-width: 128px !important;
+  .save-button {
+    padding: 5px 80px !important;
+    background-color: rgb(65, 92, 211);
+    color: white;
+    margin-top: 90% !important;
+    margin-left: 25%;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .anime-airing {
+    display: flex;
+    width: 360px !important;
+    padding-left: 10px;
+    text-align: center;
+    justify-content: space-between;
+  }
+
+  .anime-data {
+    margin: 10px;
+  }
+
+  .col-sm img {
+    max-width: 100px;
   }
 
   .airing-anime,
@@ -57,7 +91,8 @@ a {
   .airing-anime-title,
   .upcoming-anime-title,
   .search-anime-title,
-  .top-anime-title {
+  .top-anime-title,
+  .schedule-anime-title {
     font-size: 14px;
   }
 
@@ -89,6 +124,18 @@ a {
     height: 30px !important;
     font-size: 14px;
   }
+
+  .hero-img-row {
+    height: 30% !important;
+  }
+
+  .details-section {
+    margin-top: 38% !important;
+  }
+
+  .details-anime-img {
+    margin-left: 5% !important;
+  }
 }
 
 .not-found-container {
@@ -104,4 +151,25 @@ a {
 
 .schedule-anime {
   max-width: 264px;
+}
+
+.weekday {
+  margin-top: 15px;
+}
+
+.details-section {
+  margin-top: 15%;
+}
+
+.anime-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 5%;
+  margin-top: 5%;
+}
+
+.airing-info {
+  max-width: 260px;
+  margin-top: 10px;
 }
