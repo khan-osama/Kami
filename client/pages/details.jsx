@@ -10,6 +10,7 @@ export default class Details extends React.Component {
   }
 
   render() {
+    if (!this.state.animeInfo) return null;
     return (
       <div className='details-container'>
         <div className='hero-img-row'>
@@ -35,7 +36,8 @@ export default class Details extends React.Component {
                       <p className='br-info'>Episodes<br></br><span>{this.state.animeInfo.episodes !== null ? this.state.animeInfo.episodes : 'N/A'}</span></p>
                       <p className='br-info'>Status<br></br><span>{this.state.animeInfo.status}</span></p>
                       <p className='br-info'>Type<br></br><span>{this.state.animeInfo.type}</span></p>
-                      <p className='br-info'>Rating<br></br><span>{this.state.animeInfo.score}</span></p>
+                      <p className='br-info'>Rating<br></br><span>{this.state.animeInfo.score !== null ? this.state.animeInfo.score : 'N/A'}</span></p>
+                      <p className='br-info'>Air Dates<br></br><span>{this.state.animeInfo.aired.string}</span></p>
                     </div>
                   </div>
                   {/* <div className='col-sm'>

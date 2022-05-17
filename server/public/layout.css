@@ -50,8 +50,6 @@ a {
 
 @media screen and (max-width: 959px) {
   .schedule-anime {
-    display: flex;
-    margin-top: 10%;
     max-width: 128px !important;
   }
 
