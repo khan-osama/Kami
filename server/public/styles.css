@@ -126,3 +126,9 @@ span {
   top: 50%;
   left: 50%;
 }
+
+.top-anime-img,
+.schedule-anime-img {
+  width: 225px;
+  height: 346px;
+}

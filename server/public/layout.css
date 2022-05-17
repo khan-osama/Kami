@@ -134,6 +134,12 @@ a {
   .details-anime-img {
     margin-left: 5% !important;
   }
+
+  .top-anime-img,
+  .schedule-anime-img {
+    width: 100px !important;
+    height: 153px !important;
+  }
 }
 
 .not-found-container {

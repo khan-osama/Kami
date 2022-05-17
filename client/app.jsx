@@ -70,6 +70,11 @@ export default class App extends React.Component {
   }
 
   resetSearch() {
+    const navLinks = document.getElementsByClassName('nav-link');
+    for (let i = 0; i < navLinks.length; i++) {
+      navLinks[i].className = 'nav-link';
+    }
+
     this.setState({
       searchResults: []
     });
