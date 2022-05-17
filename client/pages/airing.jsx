@@ -1,8 +1,15 @@
 import React from 'react';
 
 export default class Airing extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      airing: []
+    };
+  }
+
   render() {
-    const { airing } = this.props;
+    const { airing } = this.state;
 
     return (
       <div className='home-container'>
@@ -27,5 +34,22 @@ export default class Airing extends React.Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.getAiringAnime();
+  }
+
+  getAiringAnime() {
+
+    fetch('https://api.jikan.moe/v4/seasons/now')
+      .then(data => {
+        return data.json();
+      })
+      .then(anime => {
+        this.setState({
+          airing: anime.data
+        });
+      });
   }
 }

@@ -49,8 +49,14 @@ a {
 }
 
 @media screen and (max-width: 959px) {
+  .related-elements {
+    margin-bottom: 5%;
+  }
+
   .schedule-anime {
     max-width: 128px !important;
+    display: flex;
+    margin-top: 10%;
   }
 
   .save-button {
@@ -136,9 +142,18 @@ a {
   }
 
   .top-anime-img,
-  .schedule-anime-img {
+  .schedule-anime-img,
+  .airing-anime-img {
     width: 100px !important;
     height: 153px !important;
+  }
+
+  .related-row {
+    margin-top: 5% !important;
+  }
+
+  .related-info {
+    width: 260px !important;
   }
 }
 
@@ -176,4 +191,8 @@ a {
 .airing-info {
   max-width: 260px;
   margin-top: 10px;
+}
+
+.related-row {
+  margin-top: 1.75%;
 }

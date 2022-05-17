@@ -13,8 +13,6 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      airing: [],
-      upcoming: [],
       route: parseRoute(window.location.hash),
       search: ''
     };
@@ -24,38 +22,11 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getAiringAnime();
-    this.getUpcomingAnime();
     window.addEventListener('hashchange', () => {
       this.setState({
         route: parseRoute(window.location.hash)
       });
     });
-  }
-
-  getAiringAnime() {
-
-    fetch('https://api.jikan.moe/v4/seasons/now')
-      .then(data => {
-        return data.json();
-      })
-      .then(anime => {
-        this.setState({
-          airing: anime.data
-        });
-      });
-  }
-
-  getUpcomingAnime() {
-    fetch('https://api.jikan.moe/v4/seasons/upcoming')
-      .then(data => {
-        return data.json();
-      })
-      .then(anime => {
-        this.setState({
-          upcoming: anime.data
-        });
-      });
   }
 
   handleChange(event) {
@@ -83,16 +54,16 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     if (route.path === 'home' || route.path === '') {
-      return <Home handleChange={this.handleChange} airing={this.state.airing} upcoming={this.state.upcoming} handleSubmit={this.handleSubmit} />;
+      return <Home handleChange={this.handleChange} handleSubmit={this.handleSubmit} />;
     }
     if (route.path === 'search') {
       return <SearchPage search = {this.state.search}/>;
     }
     if (route.path === 'airing') {
-      return <Airing airing={this.state.airing} />;
+      return <Airing />;
     }
     if (route.path === 'upcoming') {
-      return <Upcoming upcoming={this.state.upcoming} />;
+      return <Upcoming />;
     }
     if (route.path === 'top') {
       return <Top />;

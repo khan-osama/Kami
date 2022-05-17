@@ -27,13 +27,15 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bgImage: ''
+      bgImage: '',
+      airing: [],
+      upcoming: []
     };
   }
 
   render() {
-    const { airing } = this.props;
-    const { upcoming } = this.props;
+    const { airing } = this.state;
+    const { upcoming } = this.state;
     const slicedAiring = airing.slice(0, 5);
     const slicedUpcoming = upcoming.slice(0, 5);
 
@@ -105,6 +107,8 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     this.getRandomImage();
+    this.getAiringAnime();
+    this.getUpcomingAnime();
   }
 
   getRandomImage() {
@@ -112,5 +116,30 @@ export default class Home extends React.Component {
     this.setState({
       bgImage: randomImage
     });
+  }
+
+  getAiringAnime() {
+
+    fetch('https://api.jikan.moe/v4/seasons/now')
+      .then(data => {
+        return data.json();
+      })
+      .then(anime => {
+        this.setState({
+          airing: anime.data
+        });
+      });
+  }
+
+  getUpcomingAnime() {
+    fetch('https://api.jikan.moe/v4/seasons/upcoming')
+      .then(data => {
+        return data.json();
+      })
+      .then(anime => {
+        this.setState({
+          upcoming: anime.data
+        });
+      });
   }
 }

@@ -5,14 +5,18 @@ export default class Details extends React.Component {
     super(props);
     this.state = {
       animeImg: '',
-      animeInfo: ''
+      animeInfo: '',
+      relatedAnime: []
     };
+    this.getAnimeDetails = this.getAnimeDetails.bind(this);
   }
 
   render() {
-    if (!this.state.animeInfo) return null;
+    const { relatedAnime } = this.state;
+    const { animeId } = this.props;
+    if (!this.state.animeInfo || !this.state.relatedAnime) return null;
     return (
-      <div className='details-container'>
+      <div key={animeId} className='details-container'>
         <div className='hero-img-row'>
           <div className='container details-section'>
             <div className="row">
@@ -40,11 +44,20 @@ export default class Details extends React.Component {
                       <p className='br-info'>Air Dates<br></br><span>{this.state.animeInfo.aired.string}</span></p>
                     </div>
                   </div>
-                  {/* <div className='col-sm'>
-                    <div className='row'>
+                  <div className='col-sm'>
+                    <div className='row related-row'>
                       <h5>Related Shows</h5>
-                      <img className='related-anime-img' src={`${this.state.animeImg}`}></img>
-                      <div className='related-info'></div>
+                      {relatedAnime.filter(anime => anime.relation === 'Sequel' || anime.relation === 'Prequel').map((obj, index) => {
+                        return (
+                          <div key={obj.relation} className='col-sm related-elements'>
+                            <img className='related-anime-img' src={`${this.state.animeImg}`}></img>
+                            <div className='related-info'>
+                              <p className='relation'>{obj.relation}</p>
+                              <a href={'#details?animeId=' + obj.entry[0].mal_id} onClick={this.getAnimeDetails}>{obj.entry[0].name}</a>
+                            </div>
+                          </div>
+                        );
+                      })}
                     </div>
                     <div className='row'>
 
@@ -55,7 +68,7 @@ export default class Details extends React.Component {
                     <div className='row'>
 
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
             </div>
@@ -68,6 +81,12 @@ export default class Details extends React.Component {
     this.getAnimeDetails();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.animeId !== this.props.animeId) {
+      this.getAnimeDetails();
+    }
+  }
+
   getAnimeDetails() {
     const { animeId } = this.props;
     fetch(`https://api.jikan.moe/v4/anime/${animeId}`)
@@ -78,5 +97,14 @@ export default class Details extends React.Component {
         animeInfo: anime.data,
         animeImg: anime.data.images.jpg.image_url
       }));
+    fetch(`https://api.jikan.moe/v4/anime/${animeId}/relations`)
+      .then(data => {
+        return data.json();
+      })
+      .then(anime => {
+        this.setState({
+          relatedAnime: anime.data
+        });
+      });
   }
 }
