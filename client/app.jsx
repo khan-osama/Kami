@@ -8,6 +8,7 @@ import Upcoming from './pages/upcoming';
 import Top from './pages/top';
 import Schedule from './pages/schedule';
 import Details from './pages/details';
+import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -41,10 +42,10 @@ export default class App extends React.Component {
   }
 
   resetSearch() {
-    const navLinks = document.getElementsByClassName('nav-link');
-    for (let i = 0; i < navLinks.length; i++) {
-      navLinks[i].className = 'nav-link';
-    }
+    // const navLinks = document.getElementsByClassName('nav-link');
+    // for (let i = 0; i < navLinks.length; i++) {
+    //   navLinks[i].className = 'nav-link';
+    // }
 
     this.setState({
       searchResults: []
@@ -79,8 +80,10 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar route={this.state.route} resetSearch={this.resetSearch} />
-        { this.renderPage() }
+        <AppContext.Provider value={{ route: this.state.route }}>
+          <Navbar route={this.state.route} resetSearch={this.resetSearch} />
+          { this.renderPage() }
+        </AppContext.Provider>
       </div>
     );
   }
