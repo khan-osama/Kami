@@ -6,8 +6,8 @@ import AppContext from '../lib/app-context';
 class NavLink extends React.Component {
   render() {
     const activeClass = this.context.route.path === this.props.path
-      ? 'active-class'
-      : 'default-class';
+      ? 'active'
+      : '';
     const className = `${activeClass} ${this.props.className}`;
 
     return (
@@ -26,11 +26,11 @@ export default class AppNavBar extends React.Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav onClick={this.props.resetSearch} className="me-auto">
-              <NavLink href="#airing" className="nav-link" path="schedule">Airing</NavLink>
+              <NavLink href="#airing" className="nav-link" path="airing">Airing</NavLink>
               <NavLink href="#schedule" className="nav-link" path="schedule">Schedule</NavLink>
-              <NavLink href="#upcoming" className="nav-link" path="schedule">Upcoming</NavLink>
-              <NavLink href="#saved" className="nav-link" path="schedule">Saved</NavLink>
-              <NavLink href="#top?page=1" className="nav-link" path="schedule">Top 100</NavLink>
+              <NavLink href="#upcoming" className="nav-link" path="upcoming">Upcoming</NavLink>
+              <NavLink href="#saved" className="nav-link" path="saved">Saved</NavLink>
+              <NavLink href="#top?page=1" className="nav-link" path="top">Top 100</NavLink>
             </Nav>
           </Navbar.Collapse>
         </Container>
