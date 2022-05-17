@@ -6,7 +6,8 @@ export default class Details extends React.Component {
     this.state = {
       animeImg: '',
       animeInfo: '',
-      relatedAnime: []
+      relatedAnime: [],
+      episodes: []
     };
     this.getAnimeDetails = this.getAnimeDetails.bind(this);
   }
@@ -14,6 +15,8 @@ export default class Details extends React.Component {
   render() {
     const { relatedAnime } = this.state;
     const { animeId } = this.props;
+    const { episodes } = this.state;
+    const slicedEpisodes = episodes.slice(0, 50);
     if (!this.state.animeInfo || !this.state.relatedAnime) return null;
     return (
       <div key={animeId} className='details-container'>
@@ -59,11 +62,19 @@ export default class Details extends React.Component {
                         );
                       })}
                     </div>
-                    <div className='row'>
-
+                    <div className='row episodes-row'>
+                    <h5>Episode List</h5>
                     </div>
                     <div className='row'>
-
+                      <div className='episodes-info'>
+                        <div className='col-sm ep-col'>
+                          {slicedEpisodes.map((obj, index) => {
+                            return (
+                              <p key={obj.mal_id} className='episodes'>{obj.mal_id}. {obj.title}</p>
+                            );
+                          })}
+                        </div>
+                      </div>
                     </div>
                     <div className='row'>
 
@@ -106,5 +117,10 @@ export default class Details extends React.Component {
           relatedAnime: anime.data
         });
       });
+    fetch(`https://api.jikan.moe/v4/anime/${animeId}/episodes`)
+      .then(data => {
+        return data.json();
+      })
+      .then(episodes => this.setState({ episodes: episodes.data }));
   }
 }
