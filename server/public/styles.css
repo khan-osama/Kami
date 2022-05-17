@@ -99,7 +99,7 @@ h4 {
 }
 
 .related-anime-img {
-  width: 150px;
+  width: 120px;
   height: 170px;
   padding-right: 0;
 }
@@ -108,6 +108,10 @@ h4 {
   width: 250px;
   background-color: white;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .br-info {
@@ -119,4 +123,25 @@ h4 {
 
 span {
   color: black;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.top-anime-img,
+.schedule-anime-img,
+.airing-anime-img {
+  width: 225px;
+  height: 346px;
+}
+
+.related-elements {
+  display: flex;
+}
+
+.relation {
+  color: #339be4;
 }

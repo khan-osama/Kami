@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Spinner from 'react-bootstrap/Spinner';
 export default class Top extends React.Component {
   constructor(props) {
     super(props);
@@ -11,6 +11,14 @@ export default class Top extends React.Component {
 
   render() {
     const { top } = this.state;
+
+    if (this.state.top.length === 0) {
+      return (
+        <Spinner className='loading' animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      );
+    }
     return (
       <div className='home-container'>
         <div className="container top-page">
@@ -42,14 +50,20 @@ export default class Top extends React.Component {
   }
 
   getTopAnime() {
-    fetch('https://api.jikan.moe/v4/top/anime?type=tv')
-      .then(data => {
-        return data.json();
-      })
-      .then(anime => {
-        this.setState({
-          top: anime.data
-        });
+    const topRequests = Array(4).fill().reduce((previous, _, index) => {
+      const pageNum = index + 1;
+      return previous.then(top => {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            fetch(`https://api.jikan.moe/v4/top/anime?type=tv&page=${pageNum}`)
+              .then(res => res.json())
+              .then(page => resolve(page));
+          }, 800);
+        }).then(nextPage => top.concat(nextPage.data));
       });
+    }, Promise.resolve([]));
+
+    topRequests
+      .then(top => this.setState({ top }));
   }
 }

@@ -8,13 +8,12 @@ import Upcoming from './pages/upcoming';
 import Top from './pages/top';
 import Schedule from './pages/schedule';
 import Details from './pages/details';
+import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      airing: [],
-      upcoming: [],
       route: parseRoute(window.location.hash),
       search: ''
     };
@@ -24,38 +23,11 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getAiringAnime();
-    this.getUpcomingAnime();
     window.addEventListener('hashchange', () => {
       this.setState({
         route: parseRoute(window.location.hash)
       });
     });
-  }
-
-  getAiringAnime() {
-
-    fetch('https://api.jikan.moe/v4/seasons/now')
-      .then(data => {
-        return data.json();
-      })
-      .then(anime => {
-        this.setState({
-          airing: anime.data
-        });
-      });
-  }
-
-  getUpcomingAnime() {
-    fetch('https://api.jikan.moe/v4/seasons/upcoming')
-      .then(data => {
-        return data.json();
-      })
-      .then(anime => {
-        this.setState({
-          upcoming: anime.data
-        });
-      });
   }
 
   handleChange(event) {
@@ -70,6 +42,11 @@ export default class App extends React.Component {
   }
 
   resetSearch() {
+    // const navLinks = document.getElementsByClassName('nav-link');
+    // for (let i = 0; i < navLinks.length; i++) {
+    //   navLinks[i].className = 'nav-link';
+    // }
+
     this.setState({
       searchResults: []
     });
@@ -78,16 +55,16 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     if (route.path === 'home' || route.path === '') {
-      return <Home handleChange={this.handleChange} airing={this.state.airing} upcoming={this.state.upcoming} handleSubmit={this.handleSubmit} />;
+      return <Home handleChange={this.handleChange} handleSubmit={this.handleSubmit} />;
     }
     if (route.path === 'search') {
       return <SearchPage search = {this.state.search}/>;
     }
     if (route.path === 'airing') {
-      return <Airing airing={this.state.airing} />;
+      return <Airing />;
     }
     if (route.path === 'upcoming') {
-      return <Upcoming upcoming={this.state.upcoming} />;
+      return <Upcoming />;
     }
     if (route.path === 'top') {
       return <Top />;
@@ -103,8 +80,10 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Navbar route={this.state.route} resetSearch={this.resetSearch} />
-        { this.renderPage() }
+        <AppContext.Provider value={{ route: this.state.route }}>
+          <Navbar route={this.state.route} resetSearch={this.resetSearch} />
+          { this.renderPage() }
+        </AppContext.Provider>
       </div>
     );
   }

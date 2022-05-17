@@ -1,4 +1,5 @@
 import React from 'react';
+import Spinner from 'react-bootstrap/Spinner';
 
 export default class Schedule extends React.Component {
   constructor(props) {
@@ -13,6 +14,13 @@ export default class Schedule extends React.Component {
     const { schedule } = this.state;
     const daysOfWeek = ['Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays', 'Sundays'];
 
+    if (this.state.schedule.length === 0) {
+      return (
+        <Spinner className='loading' animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      );
+    }
     return (
       <div className='schedule-container'>
         <div className="container schedule-page">

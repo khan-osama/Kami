@@ -1,8 +1,15 @@
 import React from 'react';
 
 export default class Upcoming extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      upcoming: []
+    };
+  }
+
   render() {
-    const { upcoming } = this.props;
+    const { upcoming } = this.state;
 
     return (
       <div className='home-container'>
@@ -27,5 +34,21 @@ export default class Upcoming extends React.Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.getUpcomingAnime();
+  }
+
+  getUpcomingAnime() {
+    fetch('https://api.jikan.moe/v4/seasons/upcoming')
+      .then(data => {
+        return data.json();
+      })
+      .then(anime => {
+        this.setState({
+          upcoming: anime.data
+        });
+      });
   }
 }
