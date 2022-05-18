@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
-import { Container, Nav } from 'react-bootstrap';
+import { Container, Nav, Button } from 'react-bootstrap';
 import AppContext from '../lib/app-context';
 
 class NavLink extends React.Component {
@@ -23,6 +23,7 @@ export default class AppNavBar extends React.Component {
       <Navbar className='nav' bg="dark" variant="dark" expand="lg">
         <Container>
           <Navbar.Brand onClick={this.props.resetSearch} href="#home">Kami</Navbar.Brand>
+          <Button href='#sign-up' variant="outline-primary" onClick={this.props.handleSubmit}>Sign Up</Button>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav onClick={this.props.resetSearch} className="me-auto">

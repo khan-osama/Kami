@@ -9,6 +9,7 @@ import Top from './pages/top';
 import Schedule from './pages/schedule';
 import Details from './pages/details';
 import AppContext from './lib/app-context';
+import SignUpModal from './components/sign-up';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -74,6 +75,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'details') {
       return <Details animeId={route.params.get('animeId')} />;
+    }
+    if (route.path === 'sign-up') {
+      return <SignUpModal />;
     }
   }
 
