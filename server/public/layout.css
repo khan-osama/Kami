@@ -155,6 +155,11 @@ a {
   .related-info {
     width: 260px !important;
   }
+
+  .episodes-info {
+    width: 93% !important;
+    margin-left: 2%;
+  }
 }
 
 .not-found-container {
@@ -195,4 +200,10 @@ a {
 
 .related-row {
   margin-top: 1.75%;
+  margin-bottom: 1.5%;
+}
+
+.ep-col {
+  column-count: 2;
+  margin: 10px;
 }

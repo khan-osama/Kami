@@ -86,7 +86,7 @@ h4 {
 
 .background-container {
   width: 100%;
-  height: 100vh;
+  min-height: fill-available;
   background-color: #dbe2ef;
   margin-top: 1%;
 }
@@ -144,4 +144,12 @@ span {
 
 .relation {
   color: #339be4;
+}
+
+.episodes-info {
+  background-color: white;
+  width: 100%;
+  border-radius: 5px;
+  display: flex;
+  margin-bottom: 5%;
 }
