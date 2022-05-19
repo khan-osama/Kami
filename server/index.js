@@ -46,7 +46,8 @@ app.post('/sign-up', (req, res, next) => {
           res.status(201).json(newUser);
         })
         .catch(err => next(err));
-    });
+    })
+    .catch(err => next(err));
 });
 
 app.use(errorMiddleware);
