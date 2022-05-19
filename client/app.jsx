@@ -9,6 +9,7 @@ import Top from './pages/top';
 import Schedule from './pages/schedule';
 import Details from './pages/details';
 import AppContext from './lib/app-context';
+import SignUpForm from './components/sign-up';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -41,12 +42,35 @@ export default class App extends React.Component {
     window.location.hash = 'search?keyword=' + this.state.search;
   }
 
-  resetSearch() {
-    // const navLinks = document.getElementsByClassName('nav-link');
-    // for (let i = 0; i < navLinks.length; i++) {
-    //   navLinks[i].className = 'nav-link';
-    // }
+  handleSignUp(event) {
+    event.preventDefault();
 
+    const data = {
+      fullName: event.target.name.value,
+      email: event.target.email.value,
+      username: event.target.username.value,
+      password: event.target.password.value
+    };
+    const form = event.target;
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+
+    fetch('/sign-up', options)
+      .then(data => {
+        return data.json();
+      })
+      .then(result => {
+        form.reset();
+      })
+      .catch(err => console.error(err));
+  }
+
+  resetSearch() {
     this.setState({
       searchResults: []
     });
@@ -74,6 +98,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'details') {
       return <Details animeId={route.params.get('animeId')} />;
+    }
+    if (route.path === 'sign-up') {
+      return <SignUpForm handleSignUp={this.handleSignUp} />;
     }
   }
 

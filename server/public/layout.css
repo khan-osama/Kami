@@ -207,3 +207,10 @@ a {
   column-count: 2;
   margin: 10px;
 }
+
+.sign-up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

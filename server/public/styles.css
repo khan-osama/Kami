@@ -86,7 +86,8 @@ h4 {
 
 .background-container {
   width: 100%;
-  min-height: fill-available;
+  height: 100vh;
+  max-height: fill-available;
   background-color: #dbe2ef;
   margin-top: 1%;
 }
