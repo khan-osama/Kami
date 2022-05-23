@@ -59,7 +59,8 @@ a {
     margin-top: 10%;
   }
 
-  .save-button {
+  .save-button,
+  .unsave-button {
     padding: 5px 80px !important;
     background-color: rgb(65, 92, 211);
     color: white;
@@ -173,7 +174,8 @@ a {
   text-align: center;
 }
 
-.schedule-anime {
+.schedule-anime,
+.airing-anime {
   max-width: 264px;
 }
 
@@ -223,4 +225,9 @@ a {
 .welcome {
   height: 80%;
   padding-left: 10%;
+}
+
+.airing-anime {
+  display: flex;
+  flex-direction: column;
 }

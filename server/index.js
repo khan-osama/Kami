@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
+const authorizationMiddleware = require('./authorization-middleware');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL
@@ -88,6 +89,43 @@ app.post('/sign-in', (req, res, next) => {
           });
         })
         .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
+app.use(authorizationMiddleware);
+
+app.post('/api/saved', (req, res, next) => {
+  const { userId } = req.user;
+  const { malId, animeTitle, imageURL } = req.body;
+  if (!malId || !animeTitle || !imageURL) {
+    throw new ClientError(400, 'malId, animeTitle and imageURL are required fields');
+  }
+  const sql = `
+    insert into "saved" ("userId", "malId", "animeTitle", "imageURL")
+    values ($1, $2, $3, $4)
+    returning *
+  `;
+  const params = [userId, malId, animeTitle, imageURL];
+  db.query(sql, params)
+    .then(result => {
+      const [savedAnime] = result.rows;
+      res.status(201).json(savedAnime);
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/saved', (req, res, next) => {
+  const { userId } = req.user;
+  const sql = `
+    select *
+      from "saved"
+     where "userId" = $1
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      res.json(result.rows);
     })
     .catch(err => next(err));
 });
