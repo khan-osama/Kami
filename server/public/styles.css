@@ -75,13 +75,19 @@ h4 {
   height: 40%;
 }
 
-.save-button {
+.save-button,
+.unsave-button {
   padding: 10px 79px;
   border-radius: 5%;
   border: none;
   background-color: rgb(65, 92, 211);
   color: white;
   margin-top: 10%;
+}
+
+.unsave-button {
+  padding: 10px 75px;
+  background-color: red;
 }
 
 .background-container {
@@ -161,4 +167,12 @@ span {
 
 #success {
   color: rgb(4, 212, 4);
+}
+
+.log-in,
+.no-saves {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }

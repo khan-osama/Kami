@@ -4,19 +4,30 @@ export default class Details extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      animeImg: '',
       animeInfo: '',
       relatedAnime: [],
       episodes: []
     };
     this.getAnimeDetails = this.getAnimeDetails.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
 
   render() {
     const { relatedAnime } = this.state;
     const { animeId } = this.props;
     const { episodes } = this.state;
+    const { savedAnime } = this.props;
     const slicedEpisodes = episodes.slice(0, 50);
+
+    let button = '';
+
+    const found = savedAnime.some(obj => obj.malId === parseInt(animeId));
+    if (found) {
+      button = <button className='unsave-button'>Unsave Show</button>;
+    } else {
+      button = <button className='save-button' onClick={this.handleSave}>Save Anime</button>;
+    }
+
     if (!this.state.animeInfo || !this.state.relatedAnime) return null;
     return (
       <div key={animeId} className='details-container'>
@@ -24,15 +35,13 @@ export default class Details extends React.Component {
           <div className='container details-section'>
             <div className="row">
               <div className='col-sm schedule-anime'>
-                <img className='details-anime-img' src={`${this.state.animeImg}`}></img>
-                <button className='save-button'>Save Anime</button>
+                <img className='details-anime-img' src={`${this.state.animeInfo.images.jpg.image_url}`}></img>
+                {button}
               </div>
               <div className='col-sm anime-data'>
                 <h4>{this.state.animeInfo.title}</h4>
                 <p>{`${this.state.animeInfo.synopsis}`}</p>
               </div>
-            </div>
-            <div className="row">
             </div>
           </div>
           <div className='background-container'>
@@ -53,7 +62,7 @@ export default class Details extends React.Component {
                       {relatedAnime.filter(anime => anime.relation === 'Sequel' || anime.relation === 'Prequel').map((obj, index) => {
                         return (
                           <div key={obj.relation} className='col-sm related-elements'>
-                            <img className='related-anime-img' src={`${this.state.animeImg}`}></img>
+                            <img className='related-anime-img' src={`${this.state.animeInfo.images.jpg.image_url}`}></img>
                             <div className='related-info'>
                               <p className='relation'>{obj.relation}</p>
                               <a href={'#details?animeId=' + obj.entry[0].mal_id} onClick={this.getAnimeDetails}>{obj.entry[0].name}</a>
@@ -105,8 +114,7 @@ export default class Details extends React.Component {
         return data.json();
       })
       .then(anime => this.setState({
-        animeInfo: anime.data,
-        animeImg: anime.data.images.jpg.image_url
+        animeInfo: anime.data
       }));
     fetch(`https://api.jikan.moe/v4/anime/${animeId}/relations`)
       .then(data => {
@@ -122,5 +130,30 @@ export default class Details extends React.Component {
         return data.json();
       })
       .then(episodes => this.setState({ episodes: episodes.data }));
+  }
+
+  handleSave() {
+    const { animeInfo } = this.state;
+
+    const data = {
+      malId: animeInfo.mal_id,
+      animeTitle: animeInfo.title,
+      imageURL: animeInfo.images.jpg.image_url
+    };
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': this.props.userToken
+      },
+      body: JSON.stringify(data)
+    };
+
+    fetch('/api/saved', options)
+      .then(data => {
+        return data.json();
+      })
+      .catch(err => console.error(err));
   }
 }

@@ -12,6 +12,7 @@ import AppContext from './lib/app-context';
 import SignUpForm from './components/sign-up';
 import SignInForm from './components/sign-in';
 import ClientError from '../server/client-error';
+import Saved from './pages/saved';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -20,12 +21,15 @@ export default class App extends React.Component {
       route: parseRoute(window.location.hash),
       search: '',
       errMessage: false,
-      loginSuccess: false
+      loginSuccess: false,
+      userToken: '',
+      savedAnime: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
+    this.getSavedAnime = this.getSavedAnime.bind(this);
   }
 
   componentDidMount() {
@@ -110,7 +114,8 @@ export default class App extends React.Component {
         form.reset();
         this.setState({
           errMessage: false,
-          loginSuccess: true
+          loginSuccess: true,
+          userToken: result.token
         });
         window.location.hash = 'home';
       })
@@ -121,6 +126,26 @@ export default class App extends React.Component {
         });
         console.error(err);
       });
+  }
+
+  getSavedAnime() {
+
+    const options = {
+      headers: {
+        'X-Access-Token': this.state.userToken
+      }
+    };
+
+    fetch('/api/saved', options)
+      .then(data => {
+        return data.json();
+      })
+      .then(result => {
+        this.setState({
+          savedAnime: result
+        });
+      })
+      .catch(err => console.error(err));
   }
 
   renderPage() {
@@ -144,13 +169,16 @@ export default class App extends React.Component {
       return <Schedule />;
     }
     if (route.path === 'details') {
-      return <Details animeId={route.params.get('animeId')} />;
+      return <Details animeId={route.params.get('animeId')} userToken={this.state.userToken} savedAnime={this.state.savedAnime} />;
     }
     if (route.path === 'sign-up') {
       return <SignUpForm handleSignUp={this.handleSignUp} />;
     }
     if (route.path === 'sign-in') {
       return <SignInForm handleSignIn={this.handleSignIn} errMessage={this.state.errMessage} loginSuccess={this.state.loginSuccess}/>;
+    }
+    if (route.path === 'saved') {
+      return <Saved userToken={this.state.userToken} savedAnime={this.state.savedAnime} getSavedAnime={this.getSavedAnime} />;
     }
   }
 

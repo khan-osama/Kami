@@ -15,4 +15,17 @@ create table "public"."users" (
   "createdAt"       timestamptz(6)  not null default now(),
   primary key ("userId"),
   unique ("username")
-)
+);
+
+create table "saved" (
+  "savedId" serial,
+  "malId" integer     not null,
+  "userId" integer    not null,
+  "animeTitle" text   not null,
+  "imageURL" text     not null,
+
+  primary key("savedId"),
+  foreign key ("userId")
+    references "users" ("userId")
+
+);
