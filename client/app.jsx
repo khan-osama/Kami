@@ -71,6 +71,7 @@ export default class App extends React.Component {
       })
       .then(result => {
         form.reset();
+        window.location.hash = 'sign-in';
       })
       .catch(err => console.error(err));
   }
@@ -111,6 +112,7 @@ export default class App extends React.Component {
           errMessage: false,
           loginSuccess: true
         });
+        window.location.hash = 'home';
       })
       .catch(err => {
         this.setState({
