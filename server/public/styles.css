@@ -154,3 +154,11 @@ span {
   display: flex;
   margin-bottom: 5%;
 }
+
+#error {
+  color: red;
+}
+
+#success {
+  color: rgb(4, 212, 4);
+}

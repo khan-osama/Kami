@@ -10,16 +10,21 @@ import Schedule from './pages/schedule';
 import Details from './pages/details';
 import AppContext from './lib/app-context';
 import SignUpForm from './components/sign-up';
+import SignInForm from './components/sign-in';
+import ClientError from '../server/client-error';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       route: parseRoute(window.location.hash),
-      search: ''
+      search: '',
+      errMessage: false,
+      loginSuccess: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
   }
 
@@ -66,6 +71,7 @@ export default class App extends React.Component {
       })
       .then(result => {
         form.reset();
+        window.location.hash = 'sign-in';
       })
       .catch(err => console.error(err));
   }
@@ -74,6 +80,47 @@ export default class App extends React.Component {
     this.setState({
       searchResults: []
     });
+  }
+
+  handleSignIn(event) {
+    event.preventDefault();
+
+    const data = {
+      username: event.target.username.value,
+      password: event.target.password.value
+    };
+
+    const form = event.target;
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+
+    fetch('/sign-in', options)
+      .then(data => {
+        if (!data.ok) {
+          throw new ClientError(data.status, data.statusText);
+        }
+        return data.json();
+      })
+      .then(result => {
+        form.reset();
+        this.setState({
+          errMessage: false,
+          loginSuccess: true
+        });
+        window.location.hash = 'home';
+      })
+      .catch(err => {
+        this.setState({
+          errMessage: true,
+          loginSuccess: false
+        });
+        console.error(err);
+      });
   }
 
   renderPage() {
@@ -101,6 +148,9 @@ export default class App extends React.Component {
     }
     if (route.path === 'sign-up') {
       return <SignUpForm handleSignUp={this.handleSignUp} />;
+    }
+    if (route.path === 'sign-in') {
+      return <SignInForm handleSignIn={this.handleSignIn} errMessage={this.state.errMessage} loginSuccess={this.state.loginSuccess}/>;
     }
   }
 

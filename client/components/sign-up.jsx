@@ -41,8 +41,10 @@ export default class SignUpForm extends React.Component {
                               <label className="form-label" htmlFor="form3Example4cd">Password</label>
                             </div>
                           </div>
-                          <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                          <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4 sign-in">
                             <input type="submit" className="btn btn-primary btn-lg" value='Register' />
+                            <p className="small fw-bold mt-2 pt-1 mb-0">Already have an account?<a href="#sign-in"
+                              className="link-danger"> Sign In</a></p>
                           </div>
                         </form>
                       </div>
@@ -57,7 +59,7 @@ export default class SignUpForm extends React.Component {
               </div>
             </div>
           </div>
-      </section>
+        </section>
     );
   }
 }

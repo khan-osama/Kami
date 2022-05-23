@@ -214,3 +214,13 @@ a {
   align-items: center;
   height: 100vh;
 }
+
+.sign-in {
+  flex-direction: column;
+  margin-left: 16% !important;
+}
+
+.welcome {
+  height: 80%;
+  padding-left: 10%;
+}
