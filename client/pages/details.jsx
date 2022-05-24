@@ -6,10 +6,12 @@ export default class Details extends React.Component {
     this.state = {
       animeInfo: '',
       relatedAnime: [],
-      episodes: []
+      episodes: [],
+      reviews: []
     };
     this.getAnimeDetails = this.getAnimeDetails.bind(this);
     this.handleSave = this.handleSave.bind(this);
+    this.handleNewReview = this.handleNewReview.bind(this);
   }
 
   render() {
@@ -17,15 +19,24 @@ export default class Details extends React.Component {
     const { animeId } = this.props;
     const { episodes } = this.state;
     const { savedAnime } = this.props;
+    const { userToken } = this.props;
+    const { reviews } = this.state;
     const slicedEpisodes = episodes.slice(0, 50);
 
     let button = '';
+    let submit = '';
 
     const found = savedAnime.some(obj => obj.malId === parseInt(animeId));
-    if (found) {
-      button = <button className='unsave-button'>Unsave Show</button>;
+    if (userToken === '') {
+      button = <button className='disabled-save-button' disabled>Save Anime</button>;
+      submit = <input type='submit' value='Submit' id='review-submit-disabled' disabled></input>;
     } else {
-      button = <button className='save-button' onClick={this.handleSave}>Save Anime</button>;
+      submit = <input type='submit' value='Submit' id='review-submit'></input>;
+      if (found) {
+        button = <button className='unsave-button'>Unsave Show</button>;
+      } else {
+        button = <button className='save-button' onClick={this.handleSave}>Save Anime</button>;
+      }
     }
 
     if (!this.state.animeInfo || !this.state.relatedAnime) return null;
@@ -72,7 +83,7 @@ export default class Details extends React.Component {
                       })}
                     </div>
                     <div className='row episodes-row'>
-                    <h5>Episode List</h5>
+                      <h5>Episode List</h5>
                     </div>
                     <div className='row'>
                       <div className='episodes-info'>
@@ -86,7 +97,27 @@ export default class Details extends React.Component {
                       </div>
                     </div>
                     <div className='row'>
-
+                      <div className='col-sm review-row'>
+                        <h5>Reviews</h5>
+                        <form id='reviewform' onSubmit={this.handleNewReview}>
+                          <textarea type='review' name='review' form='reviewform' defaultValue='Leave a review...'></textarea>
+                          {submit}
+                        </form>
+                      </div>
+                    </div>
+                    <div className='row user-reviews'>
+                      <div className='episodes-info'>
+                        <div className='col-sm'>
+                          {reviews.map((obj, index) => {
+                            return (
+                              <div key={obj.reviewId}>
+                                <h5 className='username'>{obj.fullName}</h5>
+                                <p>{obj.reviewText}</p>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -130,6 +161,12 @@ export default class Details extends React.Component {
         return data.json();
       })
       .then(episodes => this.setState({ episodes: episodes.data }));
+    fetch(`/api/reviews/${animeId}`)
+      .then(data => {
+        return data.json();
+      })
+      .then(reviews => this.setState({ reviews }))
+      .catch(err => console.error(err));
   }
 
   handleSave() {
@@ -153,6 +190,42 @@ export default class Details extends React.Component {
     fetch('/api/saved', options)
       .then(data => {
         return data.json();
+      })
+      .catch(err => console.error(err));
+  }
+
+  handleNewReview(event) {
+    event.preventDefault();
+    const { animeInfo } = this.state;
+    const { reviews } = this.state;
+    const updateReviews = reviews;
+
+    const data = {
+      malId: animeInfo.mal_id,
+      reviewText: event.target.review.value
+    };
+
+    const form = event.target;
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Access-Token': this.props.userToken
+      },
+      body: JSON.stringify(data)
+    };
+
+    fetch('/api/reviews', options)
+      .then(data => {
+        return data.json();
+      })
+      .then(result => {
+        form.reset();
+        updateReviews.push(result);
+        this.setState({
+          reviews: updateReviews
+        });
       })
       .catch(err => console.error(err));
   }

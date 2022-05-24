@@ -60,7 +60,8 @@ a {
   }
 
   .save-button,
-  .unsave-button {
+  .unsave-button,
+  .disabled-save-button {
     padding: 5px 80px !important;
     background-color: rgb(65, 92, 211);
     color: white;
@@ -161,6 +162,19 @@ a {
     width: 93% !important;
     margin-left: 2%;
   }
+
+  .user-reviews {
+    margin-top: 35% !important;
+  }
+
+  textarea,
+  form {
+    width: 98% !important;
+  }
+
+  .review-row {
+    padding-left: 2% !important;
+  }
 }
 
 .not-found-container {
@@ -230,4 +244,8 @@ a {
 .airing-anime {
   display: flex;
   flex-direction: column;
+}
+
+.username {
+  padding-top: 2%;
 }
