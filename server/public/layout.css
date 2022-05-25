@@ -53,11 +53,15 @@ a {
     margin-bottom: 5%;
   }
 
-  .schedule-anime {
+  .schedule-anime,
+  .details-anime {
     max-width: 128px !important;
     display: flex !important;
-    flex-direction: row !important;
     margin-top: 10%;
+  }
+
+  .details-anime {
+    flex-direction: row !important;
   }
 
   .save-button,
@@ -192,7 +196,8 @@ a {
 
 .schedule-anime,
 .airing-anime,
-.search-anime {
+.search-anime,
+.details-anime {
   max-width: 264px;
 }
 
@@ -245,7 +250,8 @@ a {
 }
 
 .airing-anime,
-.schedule-anime {
+.schedule-anime,
+.details-anime {
   display: flex;
   flex-direction: column;
 }

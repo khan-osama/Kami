@@ -45,7 +45,7 @@ export default class Details extends React.Component {
         <div className='hero-img-row'>
           <div className='container details-section'>
             <div className="row">
-              <div className='col-sm schedule-anime'>
+              <div className='col-sm details-anime'>
                 <img className='details-anime-img' src={`${this.state.animeInfo.images.jpg.image_url}`}></img>
                 {button}
               </div>
