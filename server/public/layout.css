@@ -189,7 +189,8 @@ a {
 }
 
 .schedule-anime,
-.airing-anime {
+.airing-anime,
+.search-anime {
   max-width: 264px;
 }
 

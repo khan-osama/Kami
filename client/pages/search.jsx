@@ -63,7 +63,7 @@ export default class SearchPage extends React.Component {
 
   getSearchAnime() {
     const searchQuery = this.props.search;
-    fetch(`https://api.jikan.moe/v4/anime?q=${searchQuery}&sfw&order_by=popularity&sort=desc&type=tv,movie,ova`)
+    fetch(`https://api.jikan.moe/v4/anime?q=${searchQuery}&sfw&sort=asc&type=special&type=tv`)
       .then(data => {
         return data.json();
       })

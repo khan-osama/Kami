@@ -153,7 +153,8 @@ span {
 
 .top-anime-img,
 .schedule-anime-img,
-.airing-anime-img {
+.airing-anime-img,
+.search-anime-img {
   width: 225px;
   height: 346px;
 }
@@ -203,4 +204,9 @@ form {
 
 .user-reviews {
   margin-top: 15%;
+}
+
+.search-anime {
+  display: flex;
+  flex-direction: column;
 }
