@@ -29,3 +29,15 @@ create table "saved" (
     references "users" ("userId")
 
 );
+
+create table "reviews" (
+  "reviewId" serial,
+  "malId" integer     not null,
+  "userId" integer    not null,
+  "reviewText" text   not null,
+
+  primary key("reviewId"),
+  foreign key ("userId")
+    references "users" ("userId")
+
+);

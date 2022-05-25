@@ -93,6 +93,29 @@ app.post('/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/reviews/:malId', (req, res, next) => {
+  const { malId } = req.params;
+  if (!malId) {
+    throw new ClientError(400, 'malId is a required field.');
+  }
+  const sql = `
+    select "reviews"."malId",
+           "reviews"."reviewId",
+           "reviews"."reviewText",
+           "users"."fullName"
+    from "reviews"
+    join "users" using ("userId")
+    where "reviews"."malId" = $1
+    `;
+
+  const params = [malId];
+  db.query(sql, params)
+    .then(result => {
+      res.status(201).json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
 app.use(authorizationMiddleware);
 
 app.post('/api/saved', (req, res, next) => {
@@ -126,6 +149,26 @@ app.get('/api/saved', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/reviews', (req, res, next) => {
+  const { userId } = req.user;
+  const { malId, reviewText } = req.body;
+  if (!malId || !reviewText) {
+    throw new ClientError(400, 'malId, animeTitle and imageURL are required fields');
+  }
+  const sql = `
+    insert into "reviews" ("userId", "malId", "reviewText")
+    values ($1, $2, $3)
+    returning *
+  `;
+  const params = [userId, malId, reviewText];
+  db.query(sql, params)
+    .then(result => {
+      const [savedAnime] = result.rows;
+      res.status(201).json(savedAnime);
     })
     .catch(err => next(err));
 });
