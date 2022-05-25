@@ -198,7 +198,7 @@ export default class Details extends React.Component {
     event.preventDefault();
     const { animeInfo } = this.state;
     const { reviews } = this.state;
-    const updateReviews = reviews;
+    const updateReviews = reviews.slice();
 
     const data = {
       malId: animeInfo.mal_id,
