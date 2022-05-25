@@ -25,25 +25,32 @@ N/A
 
 3. My last project had simple server routes but this time I am using Express to manage an actual database which is a lot more challenging and interesting. It's not only important to manage the data but the security behind keeping that data safe is a challenging yet pivotal part of the application.
 
-## Screenshots
+## Previews of App
 ### Landing Page
-![1](https://user-images.githubusercontent.com/63980419/145887295-d9698af3-7cbd-4b04-bb34-380f873583d7.png)
-![2](https://user-images.githubusercontent.com/63980419/145887322-258b29b0-9e5e-4a98-bc0b-f81524ce9568.png)
+![airing](https://user-images.githubusercontent.com/63980419/170356681-db488d0f-ac79-4f84-a4cf-dce6811db8e8.gif)
+
+
 
 ### Details Page / Related Anime / Leaving a Review / Episode List
-![details1](https://user-images.githubusercontent.com/63980419/145887342-693c6739-77f6-4081-ad7f-41874819e72d.png)
+![review-log-in](https://user-images.githubusercontent.com/63980419/170356427-fb0a8dde-e25f-4952-98c0-65de6e7cac2f.gif)
+
 
 ### Saving Anime
-![save](https://user-images.githubusercontent.com/63980419/145887362-e33db4a4-e620-4bed-8271-5d193348fb29.png)
+![saved-5](https://user-images.githubusercontent.com/63980419/170356458-8a5996e6-e315-42db-aa6a-da68222780c1.gif)
+
 
 ### Schedule for the Week
-![schedulew](https://user-images.githubusercontent.com/63980419/145887374-12c4ee04-ed30-4fc9-ac95-e28441b29761.png)
+![schedule](https://user-images.githubusercontent.com/63980419/170356480-bb0cfa7a-dc2e-45b4-85c0-f35b46aee115.gif)
+
 
 ### Searching for Anime
-![search](https://user-images.githubusercontent.com/63980419/145887391-7cde1703-20ce-4fb1-bbb6-b9c1d8be4c76.png)
+![search](https://user-images.githubusercontent.com/63980419/170357013-33dd71e8-aad6-4dee-8fc2-5986219ac79e.gif)
+
 
 ### Top 100 Anime
-![top](https://user-images.githubusercontent.com/63980419/145887398-cdb9f411-ca8d-4063-817e-a7b5085732ed.png) </br>
+![top](https://user-images.githubusercontent.com/63980419/170356588-f6adb021-a6a7-4ab1-a3a5-5d18e8f84b80.gif)
+ </br>
 
 ### Upcoming Anime for Next Season
-![upcoming](https://user-images.githubusercontent.com/63980419/145887408-690b3ac8-f2bf-4a72-9f5e-f2c29e81635f.png)
+![upcoming](https://user-images.githubusercontent.com/63980419/170356657-629e6bd9-4809-482b-8104-80fdc7a76c18.gif)
+
