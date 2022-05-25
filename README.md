@@ -2,6 +2,8 @@
 
 A full stack, mobile-first, JavaScript application for anime lovers who want to get information about all things anime/manga. Front-end is coded using React, back-end is using Express to handle server and persistent data. Kami allows anime lovers to track their favorite anime, be able to save and review, and get any information and explore a database full of rich information regarding all anime shows, movies and OVAs. Data was pulled from myanimelist using the Jikan API (https://jikan.moe/). Mockups made using Figma. Link to mockups (https://www.figma.com/file/Uz0XAKY2A5gUNNIWM7LRpV/Final-Project---Osama-Khan?node-id=22%3A527).
 
+Link to live website: https://kami-anime.herokuapp.com/#home
+
 ## Features
 1. Users can search specific anime by nameo genre
 2. Users can see currently airing anime
