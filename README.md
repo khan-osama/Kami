@@ -28,10 +28,6 @@ N/A
 3. My last project had simple server routes but this time I am using Express to manage an actual database which is a lot more challenging and interesting. It's not only important to manage the data but the security behind keeping that data safe is a challenging yet pivotal part of the application.
 
 ## Previews of App
-### Landing Page
-![airing](https://user-images.githubusercontent.com/63980419/170356681-db488d0f-ac79-4f84-a4cf-dce6811db8e8.gif)
-
-
 
 ### Details Page / Related Anime / Leaving a Review / Episode List
 ![review-log-in](https://user-images.githubusercontent.com/63980419/170356427-fb0a8dde-e25f-4952-98c0-65de6e7cac2f.gif)
