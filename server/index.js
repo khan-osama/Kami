@@ -157,7 +157,7 @@ app.post('/api/reviews', (req, res, next) => {
   const { userId } = req.user;
   const { malId, reviewText } = req.body;
   if (!malId || !reviewText) {
-    throw new ClientError(400, 'malId, animeTitle and imageURL are required fields!');
+    throw new ClientError(400, 'malId, animeTitle and imageURL are required fields.');
   }
   const sql = `
     insert into "reviews" ("userId", "malId", "reviewText")
