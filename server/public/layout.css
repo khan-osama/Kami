@@ -113,7 +113,7 @@ a {
   }
 
   .bg-image img {
-    width: 390px !important;
+    width: 100% !important;
     height: 1000px !important;
     object-fit: cover !important;
     opacity: 0.7;
