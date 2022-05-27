@@ -137,10 +137,11 @@ a {
     margin-bottom: 5%;
   }
 
-  .schedule-anime {
+  .schedule-anime,
+  .airing-anime,
+  .upcoming-anime,
+  .search-anime {
     max-width: 128px !important;
-    display: flex !important;
-    margin-top: 10%;
   }
 
   .details-anime {
@@ -216,7 +217,7 @@ a {
   }
 
   .details-section {
-    margin-top: 36% !important;
+    margin-top: 25% !important;
   }
 
   .top-anime-img,
@@ -353,7 +354,7 @@ a {
   }
 
   .details-section {
-    margin-top: 38% !important;
+    margin-top: 18% !important;
   }
 
   .details-anime-img {
