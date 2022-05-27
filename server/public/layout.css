@@ -216,7 +216,7 @@ a {
   }
 
   .details-section {
-    margin-top: 38% !important;
+    margin-top: 30% !important;
   }
 
   .top-anime-img,
@@ -256,6 +256,11 @@ a {
 }
 
 @media screen and (max-width: 767px) {
+  .details {
+    display: flex;
+    flex-direction: column;
+  }
+
   .related-elements {
     margin-bottom: 5%;
   }

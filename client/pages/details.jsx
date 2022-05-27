@@ -44,12 +44,12 @@ export default class Details extends React.Component {
       <div key={animeId} className='details-container'>
         <div className='hero-img-row'>
           <div className='container details-section'>
-            <div className="row">
-              <div className='col-sm details-anime'>
+            <div className="row details">
+              <div className='col-sm col-md details-anime'>
                 <img className='details-anime-img' src={`${this.state.animeInfo.images.jpg.image_url}`}></img>
                 {button}
               </div>
-              <div className='col-sm anime-data'>
+              <div className='col-sm col-md anime-data'>
                 <h4>{this.state.animeInfo.title}</h4>
                 <p>{`${this.state.animeInfo.synopsis}`}</p>
               </div>
@@ -58,7 +58,7 @@ export default class Details extends React.Component {
           <div className='background-container'>
               <div className='container info-section'>
                 <div className='row'>
-                  <div className='col-sm airing-info'>
+                  <div className='col-sm col-md airing-info'>
                     <div className='anime-airing'>
                       <p className='br-info'>Episodes<br></br><span>{this.state.animeInfo.episodes !== null ? this.state.animeInfo.episodes : 'N/A'}</span></p>
                       <p className='br-info'>Status<br></br><span>{this.state.animeInfo.status}</span></p>
@@ -67,7 +67,7 @@ export default class Details extends React.Component {
                       <p className='br-info'>Air Dates<br></br><span>{this.state.animeInfo.aired.string}</span></p>
                     </div>
                   </div>
-                  <div className='col-sm'>
+                  <div className='col-sm col-md'>
                     <div className='row related-row'>
                       <h5>Related Shows</h5>
                       {relatedAnime.filter(anime => anime.relation === 'Sequel' || anime.relation === 'Prequel').map((obj, index) => {
@@ -87,7 +87,7 @@ export default class Details extends React.Component {
                     </div>
                     <div className='row'>
                       <div className='episodes-info'>
-                        <div className='col-sm ep-col'>
+                        <div className='col-sm col-md ep-col'>
                           {slicedEpisodes.map((obj, index) => {
                             return (
                               <p key={obj.mal_id} className='episodes'>{obj.mal_id}. {obj.title}</p>
@@ -97,7 +97,7 @@ export default class Details extends React.Component {
                       </div>
                     </div>
                     <div className='row'>
-                      <div className='col-sm review-row'>
+                      <div className='col-sm col-md review-row'>
                         <h5>Reviews</h5>
                         <form id='reviewform' onSubmit={this.handleNewReview}>
                           <textarea type='review' name='review' form='reviewform' defaultValue='Leave a review...'></textarea>
@@ -107,7 +107,7 @@ export default class Details extends React.Component {
                     </div>
                     <div className='row user-reviews'>
                       <div className='episodes-info'>
-                        <div className='col-sm'>
+                        <div className='col-sm col-md'>
                           {reviews.map((obj, index) => {
                             return (
                               <div key={obj.reviewId}>
