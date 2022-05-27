@@ -112,7 +112,7 @@ h4 {
 }
 
 .anime-airing {
-  width: 225px;
+  width: 240px;
   background-color: white;
   border-radius: 5px;
   margin-top: 3%;
@@ -154,7 +154,8 @@ span {
 .top-anime-img,
 .schedule-anime-img,
 .airing-anime-img,
-.search-anime-img {
+.search-anime-img,
+.upcoming-anime-img {
   width: 225px;
   height: 346px;
 }
