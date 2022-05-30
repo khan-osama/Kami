@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Spinner from 'react-bootstrap/Spinner';
 export default class Details extends React.Component {
   constructor(props) {
     super(props);
@@ -39,6 +39,14 @@ export default class Details extends React.Component {
       }
     }
 
+    if (this.state.relatedAnime.length === 0 || !this.state.animeInfo || !this.state.episodes) {
+      return (
+        <Spinner className='loading' animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      );
+    }
+
     if (!this.state.animeInfo || !this.state.relatedAnime) return null;
     return (
       <div key={animeId} className='details-container'>
@@ -76,7 +84,7 @@ export default class Details extends React.Component {
                             <img className='related-anime-img' src={`${this.state.animeInfo.images.jpg.image_url}`}></img>
                             <div className='related-info'>
                               <p className='relation'>{obj.relation}</p>
-                              <a href={'#details?animeId=' + obj.entry[0].mal_id} onClick={this.getAnimeDetails}>{obj.entry[0].name}</a>
+                              <a href={'#details?animeId=' + obj.entry[0].mal_id}>{obj.entry[0].name}</a>
                             </div>
                           </div>
                         );
@@ -140,27 +148,32 @@ export default class Details extends React.Component {
 
   getAnimeDetails() {
     const { animeId } = this.props;
-    fetch(`https://api.jikan.moe/v4/anime/${animeId}`)
-      .then(data => {
-        return data.json();
-      })
-      .then(anime => this.setState({
-        animeInfo: anime.data
-      }));
-    fetch(`https://api.jikan.moe/v4/anime/${animeId}/relations`)
-      .then(data => {
-        return data.json();
-      })
-      .then(anime => {
-        this.setState({
-          relatedAnime: anime.data
+    this.setState({ animeInfo: '' });
+    setTimeout(() => {
+      fetch(`https://api.jikan.moe/v4/anime/${animeId}`)
+        .then(data => {
+          return data.json();
+        })
+        .then(anime => this.setState({
+          animeInfo: anime.data
+        }));
+    }, 1000);
+    setTimeout(() => {
+      fetch(`https://api.jikan.moe/v4/anime/${animeId}/relations`)
+        .then(data => {
+          return data.json();
+        })
+        .then(anime => {
+          this.setState({
+            relatedAnime: anime.data
+          });
         });
-      });
-    fetch(`https://api.jikan.moe/v4/anime/${animeId}/episodes`)
-      .then(data => {
-        return data.json();
-      })
-      .then(episodes => this.setState({ episodes: episodes.data }));
+      fetch(`https://api.jikan.moe/v4/anime/${animeId}/episodes`)
+        .then(data => {
+          return data.json();
+        })
+        .then(episodes => this.setState({ episodes: episodes.data }));
+    }, 2000);
     fetch(`/api/reviews/${animeId}`)
       .then(data => {
         return data.json();
