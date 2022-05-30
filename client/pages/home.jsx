@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Button, FormControl } from 'react-bootstrap';
+import Spinner from 'react-bootstrap/Spinner';
 
 const heroImages = [
   {
@@ -38,6 +39,14 @@ export default class Home extends React.Component {
     const { upcoming } = this.state;
     const slicedAiring = airing.slice(0, 5);
     const slicedUpcoming = upcoming.slice(0, 5);
+
+    if (this.state.airing.length === 0 || this.state.upcoming.length === 0) {
+      return (
+        <Spinner className='loading' animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      );
+    }
 
     return (
       <div className='home-container'>
